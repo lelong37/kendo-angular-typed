@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>@ViewData["Title"] - asim2</title>
+
+        <environment names="Development">
+            <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css" />
+            <link rel="stylesheet" href="/css/site.css" />
+        </environment>
+        <environment names="Staging,Production">
+            <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.5/css/bootstrap.min.css"
+                  asp-fallback-href="/lib/bootstrap/dist/css/bootstrap.min.css"
+                  asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+            <link rel="stylesheet" href="/css/site.min.css" asp-append-version="true" />
+        </environment>
+    </head>
+    <body>
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a asp-controller="Home" asp-action="Index" class="navbar-brand">WebApplicationBasic</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li><a asp-controller="Home" asp-action="About">About</a></li>
+                        <li><a asp-controller="Home" asp-action="Contact">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="container body-content">
+            
+            
+          
+          
+          
+<div class="view-container" style="border:none; height:100%;">
+        <div class="view-header" style="border:none; height:15%;">
+            <div class="k-block">
+                <h2>Report Shipment</h2>
+            </div>
+
+            <div class="view-toolbar" style="border:none; height:15%;">
+                <div style="float: left; width:1500px">
+                    <label for="poNumber" width="10">PO Number:</label>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input id="poNumber"
+                           type="text"
+                           class="k-textbox input-sm"
+                           width="10"
+                           maxlength="30" />
+                    <button type="button" title="Search PO Number" data-role="button" data-bind="click: navigateToPO">Go</button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <label for="ticketNumber">Ticket Number:</label>
+                    <input id="ticketNumber"
+                           type="text"
+                           class="k-textbox input-sm"
+                           width="10"
+                           maxlength="30" />
+                    <button type="button" title="Search Ticket Number" data-role="button" data-bind="click: navigateToTicketNo">Go</button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <label for="shipToNumber" style="width:25px">Ship To:</label>
+                    <input id="shipTo"
+                           type="text"
+                           class="k-textbox input-sm"
+                           width="10"
+                           maxlength="30" />
+                    <button type="button" title="Search Ship To" data-role="button" data-bind="click: navigateToShip">Go</button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button type="button" title="Retrieve All Open Tickets" data-role="button" data-bind="click: navigateToAllOpenTickets">Retrieve All Open Tickets</button>
+                </div>
+            </div>
+            <div class="view-toolbar" style="border:none; height:10%;">
+                <div style="float: left; width:1000px">
+                    <div style="float: left; width:400px">
+                        <label for="iSupplierShipmentNumber">iSupplier <br>Shipment Number:</label>
+                        <input id="supplierNumber"
+                               type="text"
+                               class="k-textbox input-sm" />
+                        <button type="button" title="Search iSupplier Shipment Number" data-role="button" data-bind="click: navigateToiSupplier">Go</button>
+                    </div>
+                    <div style="float: left; width:400px">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <label for="containerNumber">Container Number:</label>
+                        <input id="containerNumber"
+                               type="text"  
+                               class="k-textbox input-sm"
+                               maxlength="30" />
+                        <button type="button" title="Search Container Number" data-role="button" data-bind="click: navigateToContainerNo">Go</button>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div id="reportShipmentViewContent" class="view-content" style="border:none; height:50%; width:95%; ">
+                <div id="reportShipmentGrid"
+                     data-role="grid"
+                     data-resizable="false"
+                     data-navigatable="true"
+                     data-editable="false"
+                     data-pageable="true"
+                     data-scrollable="true"
+                     data-sortable="true"
+                     data-columns="[
+                            { 'field': 'includedInShipment', title: '<b>Included In <br> Shipment', filterable: false, sortable: false, 'width': 85, hidden: false, template: myApp.main.crReportShipment.viewModel.checkboxTemplate  },
+                            { 'field': 'ticketNumber', 'title': '<b>Ticket No.', 'width': 135, editable: false },
+                            { 'field': 'poNumber', 'title': '<b>PO No.', 'width': 65, editable: false },
+                            { 'field': 'lineNumber', 'title': '<b>Line No.', 'width': 65, editable: false },
+                            { 'field': 'shipTo', 'title': '<b>Ship To', 'width': 65, editable: false },
+                            { 'field': 'itemNumber', 'title': '<b>Item No.', 'width': 65, editable: false },
+                            { 'field': 'description', 'title': '<b>Description', 'width': 210 },
+                            { 'field': 'ticketQty', 'title': '<b>Ticket <br> Qty', 'width': 65 },
+                            { 'field': 'supplierSiteID', 'title': '<b>Supplier <br> Site ID', 'width': 65 },
+                            { 'field': 'qtyProdNotShipped', 'title': '<b>Shipment', 'width': 85 },
+                            { 'field': 'qtyOpenToProduce', 'title': '<b>Shipment <br> Line', 'width': 85 },
+                            { 'field': 'container', 'title': '<b>Container', 'width': 150 },
+                            { 'field': 'dropShip', 'title': '<b>Drop <br> Ship', 'width': 40 },
+                            { 'field': 'createdBy', 'title': '<b>Created By', 'width': 90 },
+                            { 'field': 'creationDate', 'title': '<b>Creation Date', 'width': 140 }
+                        ]"
+                     data-bind="source: reportShipmentResults" style="height: 100%; width:99%; border:none;">
+                </div>
+            </div>
+            <br />
+            <div style="float:left;">
+                &nbsp;
+                <button type="button" title="Add Tickets To Shipment" data-role="button" data-bind="click: navigateAddTickets" id="AddTickets">Add Tickets To Shipment</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                @* Disable "Review Shipment" button until the user has clicked "Add Tickets To Shipment"*@
+                <button type="button" title="Review Shipment" data-role="button" data-bind="enabled: isEditing, click: navigateToReview">Review Shipment</button>
+                @*<button type="button" title="Review Shipment" data-role="button" data-bind="click: navigateToReview">Review Shipment</button>*@
+            </div>
+        </div>
+    </div>
+          
+          
+            
+            
+            
+            <hr />
+            <footer>
+                <p>&copy; 2015 - asim2</p>
+            </footer>
+        </div>
+
+        <environment names="Development">
+            <script src="/lib/jquery/dist/jquery.js"></script>
+            <script src="/lib/bootstrap/dist/js/bootstrap.js"></script>
+            <script src="/js/site.js" asp-append-version="true"></script>
+        </environment>
+        <environment names="Staging,Production">
+            <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.1.4.min.js"
+                    asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                    asp-fallback-test="window.jQuery">
+            </script>
+            <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.5/bootstrap.min.js"
+                    asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+                    asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal">
+            </script>
+            <script src="/js/site.min.js" asp-append-version="true"></script>
+        </environment>
+
+        
+    </body>
+</html>
+
+
+
+

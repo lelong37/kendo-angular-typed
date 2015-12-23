@@ -1,0 +1,185 @@
+﻿<div class="alert alert-success fade in">
+    <button class="close" data-dismiss="alert">×</button>
+    <i class="fa-fw fa fa-info"></i>
+    <strong>Info!</strong> {{vm.message}}
+</div>
+
+<h5 class="row-title">{{vm.title}}</h5>
+
+<div kendo-grid="grid" id="grid" options="vm.leadGridOptions">
+    <style scoped>
+        .circle {
+            width: 20px;
+            height: 20px;
+            -moz-border-radius: 10px;
+            -webkit-border-radius: 10px;
+            border-radius: 10px;
+        }
+
+        .k-tabstrip {
+            border-style: none;
+            border-width: 0;
+        }
+
+        ul {
+            padding-left: 0;
+            list-style: none;
+        }
+
+        .k-grid-content {
+            min-height: 200px;
+        }
+
+        .k-grid .k-grid-header .k-header .k-link {
+            height: auto;
+        }
+
+        .k-grid .k-grid-header .k-header {
+            white-space: normal;
+        }
+    </style>
+    <div k-detail-template>
+        <div kendo-tabstrip>
+            <ul>
+                <li class="k-state-active">Lead Details</li>
+            </ul>
+            <div class="row" style="padding-top: 25px">
+                <div class="col-xs-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Property Information
+                        </div>
+                        <div class="panel-body">
+                            <ul>
+                                <li>
+                                    <strong>Lot:</strong> {{dataItem.detailRow.PropertyLot}}
+                                </li>
+                                <li>
+                                    <strong>Tract:</strong> {{dataItem.detailRow.PropertyTract}}
+                                </li>
+                                <li>
+                                    <strong>Property Address:</strong> {{dataItem.detailRow.PropertyAddress}}, {{dataItem.detailRow.PropertyCity}}, {{dataItem.detailRow.PropertyState}}. {{dataItem.detailRow.PropertyPostalCode}}
+                                </li>
+                            </ul>
+                            <ul>
+                                <li>
+                                    <strong>Property Price:</strong> $ {{dataItem.detailRow.PropertyPrice}}
+                                </li>
+                                <li>
+                                    <strong>Cash Available:</strong> $ {{dataItem.detailRow.CashAvailable}}
+                                </li>
+                            </ul>
+                            <ul>
+                                <li>
+                                    <strong>Buyers Married:</strong> {{dataItem.detailRow.BuyersMarried == true ? 'Yes' : 'No' }}
+                                </li>
+                            </ul>
+                            <ul>
+                                <li>
+                                    <strong>Community:</strong> {{dataItem.detailRow.Community.Name}}
+                                </li>
+                            </ul>
+                            <ul>
+                                <li>
+                                    <strong>Velocify Ref:</strong> {{dataItem.detailRow.VelocifyRefId}}
+                                </li>
+                                <li>
+                                    <strong>Mortgage Professional:</strong> {{dataItem.detailRow.Community.MortgageProfessional}}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Buyer 1 Information
+                        </div>
+                        <div class="panel-body" ng-if="dataItem.detailRow.Applicants[0] != null">
+                            <ul>
+                                <li>
+                                    <strong>Name:</strong> {{dataItem.detailRow.Applicants[0].FirstName}} {{dataItem.detailRow.Applicants[0].LastName}}
+                                </li>
+                                <li>
+                                    <strong>Address:</strong> {{dataItem.detailRow.Applicants[0].Address1}} {{dataItem.detailRow.Applicants[0].Address2}}, {{dataItem.detailRow.Applicants[0].City}}, {{dataItem.detailRow.Applicants[0].State}}. {{dataItem.detailRow.Applicants[0].Zip}}
+                                </li>
+                            </ul>
+                            <ul>
+                                <li>
+                                    <strong>Home Phone:</strong> {{dataItem.detailRow.Applicants[0].HomePhone}}
+                                </li>
+                                <li>
+                                    <strong>Work Phone:</strong> {{dataItem.detailRow.Applicants[0].BusinessPhone}}
+                                </li>
+                                <li>
+                                    <strong>Cell Phone:</strong> {{dataItem.detailRow.Applicants[0].MobilePhone}}
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="panel-body" ng-if="dataItem.detailRow.Applicants[0] == null">
+                            Buyer Information Not Available
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Buyer 2 Information
+                        </div>
+                        <div class="panel-body" ng-if="dataItem.detailRow.Applicants[1] != null">
+                            <ul>
+                                <li>
+                                    <strong>Name:</strong> {{dataItem.detailRow.Applicants[1].FirstName}} {{dataItem.detailRow.Applicants[1].LastName}}
+                                </li>
+                                <li>
+                                    <strong>Address:</strong> {{dataItem.detailRow.Applicants[1].Address1}} {{dataItem.detailRow.Applicants[1].Address2}}, {{dataItem.detailRow.Applicants[1].City}}, {{dataItem.detailRow.Applicants[1].State}}. {{dataItem.detailRow.Applicants[1].Zip}}
+                                </li>
+                            </ul>
+                            <ul>
+                                <li>
+                                    <strong>Home Phone:</strong> {{dataItem.detailRow.Applicants[1].HomePhone}}
+                                </li>
+                                <li>
+                                    <strong>Work Phone:</strong> {{dataItem.detailRow.Applicants[1].BusinessPhone}}
+                                </li>
+                                <li>
+                                    <strong>Cell Phone:</strong> {{dataItem.detailRow.Applicants[1].MobilePhone}}
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="panel-body" ng-if="dataItem.detailRow.Applicants[1] == null">
+                            Buyer Information Not Available
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script id="toolbar" type="text/x-kendo-template">
+    <div style="padding:5px" class="pull-right">
+        Start: <input kendo-date-picker
+                      ng-model="vm.fromDateString"
+                      k-ng-model="vm.fromDateObject" />        
+        &nbsp;&nbsp;
+        End: <input kendo-date-picker
+                    ng-model="vm.toDateString"
+                    k-ng-model="vm.toDateObject" />        
+        &nbsp;<button class="btn btn-primary" ng-click="vm.search()" ng-disabled="!vm.fromDateString || !vm.toDateString">Search</button>
+        &nbsp;<button class="btn btn-primary" ng-click="vm.clear()">Clear</button>
+    </div>
+</script>
+
+<script id="ficoTemplate" type="text/x-kendo-template">
+    #
+    if(data.FicoRange == 'LOW') {#
+    <div class="circle" style="background: red;"></div>
+    # } if(data.FicoRange == 'MEDIUM') { #
+    <div class="circle" style="background: orange;"></div>
+    # } if(data.FicoRange == 'HIGH') { #
+    <div class="circle" style="background: green;"></div>
+    # } #
+</script>
+

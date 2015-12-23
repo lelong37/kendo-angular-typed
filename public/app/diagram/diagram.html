@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>HTML5 Diagram Sample Application by Telerik Kendo UI</title>
+
+    <link rel="stylesheet" href="/lib/kendo-ui/styles/kendo.common.min.css" />
+    <link rel="stylesheet" href="/lib/kendo-ui/styles/kendo.rtl.min.css" />
+    <link rel="stylesheet" href="/lib/kendo-ui/styles/kendo.metro.min.css" />
+    <link rel="stylesheet" href="/lib/kendo-ui/styles/kendo.dataviz.min.css" />
+    <link rel="stylesheet" href="/lib/kendo-ui/styles/kendo.dataviz.metro.min.css" />
+
+    <link rel="stylesheet" href="diagram.css" />
+</head>
+
+<body ng-app="diagram" ng-controller="diagram.DiagramController as vm">
+
+    <div id="menu">
+        <div class="header">
+            Design Surface Example w/ MEAN Stack & Kendo UI in full TypeScript
+            <a id="about" ng-click="vm.aboutClick($event)">About</a>
+        </div>
+        <ul kendo-menu="menu" k-options="vm.menuOptions"></ul>
+    </div>
+    <div id="splitter" kendo-splitter="splitter" k-options="vm.splitterOptions">
+        <div id="left-pane">
+            <div class="pane-content">
+                <ul id="shapesPanelBar" kendo-panel-bar="shapesPanelBar" k-options="vm.panelBarOptions">
+                    <li>
+                        Basic Shapes
+                        <ul>
+                            <li>
+                                <span kendo-draggable k-options="vm.shapeItemDraggableOptions" class="shapeItem" data-shape='{"width":120,"height":120,"type":"rectangle"}'
+                                style="background-position: 0 0"></span>
+                                <span>Square</span>
+                            </li>
+                            <li>
+                                <span kendo-draggable k-options="vm.shapeItemDraggableOptions" class="shapeItem" data-shape='{"type":"circle","width":120,"height":120}'
+                                style="background-position: -60px 0"></span>
+                                <span>Circle</span>
+                            </li>
+                            <li>
+                                <span kendo-draggable k-options="vm.shapeItemDraggableOptions" class="shapeItem" data-shape='{"width":120,"height":80,"type":"rectangle"}'
+                                style="background-position: -120px 0"></span>
+                                <span>Rectangle</span>
+                            </li>
+                            <li>
+                                <span kendo-draggable k-options="vm.shapeItemDraggableOptions" class="shapeItem" data-shape='{"type":"circle","width":120,"height":80}'
+                                style="background-position: -180px 0"></span>
+                                <span>Ellipse</span>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        Polygons
+                        <ul>
+                            <li>
+                                <span kendo-draggable k-options="vm.shapeItemDraggableOptions" class="shapeItem" data-type="pentagon" data-shape='{"path":"M 60,0 L120,44 L97,114 L23,114 L0,44 z"}'
+                                style="background-position: -240px 0"></span>
+                                <span>Pentagon</span>
+                            </li>
+                            <li>
+                                <span kendo-draggable k-options="vm.shapeItemDraggableOptions" class="shapeItem" data-type="hexagon" data-shape='{"path":"m30,0 L90,0 L120,52 L90,104 L30,104 L0,52 z"}'
+                                style="background-position: -300px 0"></span>
+                                <span>Hexagon</span>
+                            </li>
+                            <li>
+                                <span kendo-draggable k-options="vm.shapeItemDraggableOptions" class="shapeItem" data-type="heptagon" data-shape='{"path":"m60,0 L108.12,23.17 L120,75.24 L86.7,116.99 L33.3,116.99 L0,75.24 L11.88,23.17 z"}'
+                                style="background-position: -360px 0"></span>
+                                <span>Heptagon</span>
+                            </li>
+                            <li>
+                                <span kendo-draggable k-options="vm.shapeItemDraggableOptions" class="shapeItem" data-type="octagon" data-shape='{"path":"m35.15,0 L84.85,0 L120,35.15 L120,84.85 L84.85,120 L35.15,120 L0,84.85 L0,35.15 z"}'
+                                style="background-position: -420px 0"></span>
+                                <span>Octagon</span>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        Arrows
+                        <ul>
+                            <li>
+                                <span kendo-draggable k-options="vm.shapeItemDraggableOptions" class="shapeItem" data-shape='{"path":"m0,20 L20,0 L20,10 L120,10 L120,30 L20,30 L20,40 z"}'
+                                style="background-position: -480px 0"></span>
+                                <span>45 degree</span>
+                            </li>
+                            <li>
+                                <span kendo-draggable k-options="vm.shapeItemDraggableOptions" class="shapeItem" data-shape='{"path":"m0,20 L11.5,0 L11.5,10 L120,10 L120,31 L11.5,31 L11.5,40 z"}'
+                                style="background-position: -540px 0"></span>
+                                <span>60 degree</span>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div id="center-pane">
+            <div class="pane-content">
+                <div id="diagram" kendo-diagram="diagramWidget" k-options="vm.diagramWidgetOptions" ng-style='{"background-color": vm.canvasBackgroundColor}'>
+                </div>
+            </div>
+        </div>
+        <div id="right-pane">
+            <div class="pane-content">
+                <ul id="configurationPanelBar" kendo-panelbar="configurationPanelBar" k-options="vm.panelBarOptions">
+                    <li>
+                        Canvas Properties
+                        <div id="canvasProperties">
+                            <ul>
+                                <li>
+                                    <span>Background Color:</span>
+                                    <input kendo-color-picker id="canvasBackgroundColorPicker" ng-model="vm.canvasBackgroundColor" class="colorPicker" />
+                                </li>
+                                <li>
+                                    <span>Layout:</span>
+                                    <input id="canvasLayout" kendo-drop-down-list k-options="vm.canvasLayoutOptions" />
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        Shape Properties
+                        <div id="shapeProperties">
+                            <ul>
+                                <li>
+                                    <span>Background Color:</span>
+                                    <input kendo-color-picker id="shapeBackgroundColorPicker" ng-model="vm.selectedShape.options.fill" class="colorPicker" k-on-change="vm.shapePropertiesChange(kendoEvent)"
+                                    />
+                                </li>
+                                <li>
+                                    <span>Stroke Color:</span>
+                                    <input kendo-color-picker id="shapeStrokeColorPicker" ng-model="vm.selectedShape.options.stroke.color" class="colorPicker"
+                                    k-on-change="vm.shapePropertiesChange(kendoEvent)" />
+                                </li>
+                                <li>
+                                    <span>Stroke Width:</span>
+                                    <input kendo-numeric-text-box type="text" id="shapeStrokeWidthWidget" k-ng-model="vm.selectedShape.options.stroke.width"
+                                    class="numeric" k-on-change="vm.shapePropertiesChange(kendoEvent)" />
+                                </li>
+                                <li>
+                                    <span>Width:</span>
+                                    <input kendo-numeric-text-box type="text" id="shapeWidthWidget" k-ng-model="vm.selectedShape.options.width" class="numeric"
+                                    k-on-change="vm.shapePropertiesChange(kendoEvent)" />
+                                </li>
+                                <li>
+                                    <span>Height:</span>
+                                    <input kendo-numeric-text-box type="text" id="shapeHeightWidget" k-ng-model="vm.selectedShape.options.height" class="numeric"
+                                    k-on-change="vm.shapePropertiesChange(kendoEvent)" />
+                                </li>
+                                <li>
+                                    <span>Position X:</span>
+                                    <input kendo-numeric-text-box type="text" id="shapePositionXWidget" k-ng-model="vm.selectedShape.options.x" class="numeric"
+                                    k-on-change="vm.shapePropertiesChange(kendoEvent)" />
+                                </li>
+                                <li>
+                                    <span>Position Y:</span>
+                                    <input kendo-numeric-text-box type="text" id="shapePositionYWidget" k-ng-model="vm.selectedShape.options.y" class="numeric"
+                                    k-on-change="vm.shapePropertiesChange(kendoEvent)" />
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        Connection Properties
+                        <div id="connectionProperties">
+                            <ul>
+                                <li>
+                                    <span>Start Cap:</span>
+                                    <input id="connectionStartCap" kendo-drop-down-list k-options="vm.connectionCapOptions" ng-model="vm.selectedConnection.options.startCap"
+                                    />
+                                </li>
+                                <li>
+                                    <span>End Cap:</span>
+                                    <input id="connectionEndCap" kendo-drop-down-list k-options="vm.connectionCapOptions" ng-model="vm.selectedConnection.options.endCap"
+                                    />
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        Align
+                        <div id="alignConfiguration" style="width: 100%; padding: 10px; box-sizing: border-box; text-align: left;">
+                            <button kendo-button class="configurationButtons" data-position="top" k-on-click="vm.alignConfigurationClick(kendoEvent)">
+                                <span class="alignTop"></span>
+                            </button>
+                            <button kendo-button class="configurationButtons" data-position="bottom" k-on-click="vm.alignConfigurationClick(kendoEvent)">
+                                <span class="alignBottom"></span>
+                            </button>
+                            <button kendo-button class="configurationButtons" data-position="left" k-on-click="vm.alignConfigurationClick(kendoEvent)">
+                                <span class="alignLeft"></span>
+                            </button>
+                            <button kendo-button class="configurationButtons" data-position="right" k-on-click="vm.alignConfigurationClick(kendoEvent)">
+                                <span class="alignRight"></span>
+                            </button>
+                        </div>
+                    </li>
+                    <li>
+                        Arrange
+                        <div id="arrangeConfiguration">
+                            <div style="width: 100%; padding: 10px; box-sizing: border-box; text-align: left;">
+                                <button kendo-button class="configurationButtons" k-on-click="vm.arrangeConfigurationClick(kendoEvent)">
+                                    <span class="toFront"></span>
+                                </button>
+                                <button kendo-button class="configurationButtons" k-on-click="vm.arrangeConfigurationClick(kendoEvent)">
+                                    <span class="toBack"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div id="bottom-box">
+        <input kendo-slider k-ng-model="vm.diagramZoomIndicator" id="diagramZoom" k-options="vm.diagramZoomOptions" />
+        <input type="text" id="diagramZoomIndicator" value="{{vm.diagramWidget.zoom() * 100}}" class="k-textbox" style="width: 40px; vertical-align: middle;"
+        />
+    </div>
+
+    <div id="window" kendo-window k-options="vm.windowWidgetOptions">
+        <h2>Design Surface Application by Telerik</h2>
+        <h3>Angularized, Typed and ported to MEAN stack by <a href="http://developer.telerik.com/community/developer-experts/">Telerik Developer Expert</a> <a href="http://blog.longle.net" target="_blank">Long Le</a>  @ Neudesic</h3>
+
+        <p>The Diagramming Tool app was built with Telerik HTML5 Kendo UI widgets. Telerik Kendo UI framework consists of
+            <a
+            href="http://www.telerik.com/kendo-ui#Widgets">70+ UI widgets</a> that take care of the common functionality of your application, while leaving you with more
+                time to work on its business logic.</p>
+
+        <p>The app demonstrates the Diagram widget functionality and its integration with numerous other Telerik components.
+            The source code is available so you can use it as a base for implementing your custom scenario.</p>
+
+        <p>The sample app enables users to modify, add, remove and connect shapes. Once they are happy with the diagram they
+            have created, they can save it to a file and load it back later.</p>
+
+        <p>Make sure you try the various built-in layouts of the Diagram control showcased in the sample.</p>
+
+        <h3>Featured Kendo UI Widgets</h3>
+        <ul>
+            <li><a href="http://www.telerik.com/kendo-ui/web-button">Button</a></li>
+            <li><a href="http://www.telerik.com/kendo-ui/colorpicker">Color Picker</a></li>
+            <li><a href="http://www.telerik.com/kendo-ui/diagram">Diagram</a></li>
+            <li><a href="http://demos.telerik.com/kendo-ui/web/dragdrop/index.html">Drag & Drop</a></li>
+        </ul>
+        <ul>
+            <li><a href="http://www.telerik.com/kendo-ui/dropdownlist">DropDownList</a></li>
+            <li><a href="http://www.telerik.com/kendo-ui/menu">Menu</a></li>
+            <li><a href="http://www.telerik.com/kendo-ui/numerictextbox">Numeric TextBox</a></li>
+            <li><a href="http://www.telerik.com/kendo-ui/panelbar">PanelBar</a></li>
+        </ul>
+        <ul>
+            <li><a href="http://www.telerik.com/kendo-ui/splitter">Splitter</a></li>
+            <li><a href="http://www.telerik.com/kendo-ui/slider">Slider</a></li>
+            <li><a href="http://www.telerik.com/kendo-ui/upload">Upload</a></li>
+            <li><a href="http://www.telerik.com/kendo-ui/window">Window</a></li>
+        </ul>
+        <br/>
+        <br/>
+    </div>
+
+    <script src="/bower/jquery/dist/jquery.min.js"></script>
+    <script src="/bower/angular/angular.min.js"></script>
+    <script src="/lib/kendo-ui/js/jszip.min.js"></script>
+    <script src="/lib/kendo-ui/js/kendo.all.min.js"></script>
+    <script src="/lib/kendo-ui/js/kendo.timezones.min.js"></script>
+
+    <!--diagram-->
+    <script src="diagram.core.module.js"></script>
+    <script src="diagram.module.js"></script>
+    <script src="diagram.config.js"></script>
+    <script src="diagram.controller.js"></script>
+
+</body>
+</html>

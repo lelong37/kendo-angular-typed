@@ -1,0 +1,67 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home Page - WebApplication4</title>
+
+        <link rel="stylesheet" href="/bower/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="/css/site.css" />
+        <link rel="stylesheet" href="/lib/kendo-ui/styles/kendo.common.min.css" />
+        <link rel="stylesheet" href="/lib/kendo-ui/styles/kendo.default.min.css" />
+    
+</head>
+<body ng-app="app">
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">WebApplication4</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a ui-sref="/">Home</a></li>
+                    <li><a ui-sref="/home">About</a></li>
+                    <li><a ui-sref="/home/contact">Contact</a></li>
+                    <li><a ui-sref="/home/about">About</a></li>
+                    <li><a href="/app/diagram/diagram.html">Diagram</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content" ng-view>
+        
+        <hr />
+        <footer>
+            <p>&copy; 2015 - WebApplication4</p>
+        </footer>
+    </div>
+
+        <script src="/bower/jquery/dist/jquery.min.js"></script>
+        <script src="/bower/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="/bower/angular/angular.min.js"></script>
+        <script src="/bower/angular-ui-router/release/angular-ui-router.min.js"></script>
+        <script src="/bower/angular-resource/angular-resource.min.js"></script>
+
+        <script src="/lib/kendo-ui/js/kendo.all.min.js"></script>        
+        
+        <script src="/app/app.module.js"></script>        
+        <script src="/app/app.core.module.js"></script>        
+        <script src="/app/app.config.js"></script>
+        <script src="/app/app.run.js"></script>                
+        
+        <script src="/app/home/home.module.js"></script>        
+        <script src="/app/home/home.routes.js"></script>        
+        <script src="/app/home/home.index.controller.js"></script>
+        <script src="/app/home/home.about.controller.js"></script>
+        <script src="/app/home/home.contact.controller.js"></script>
+        
+    
+</body>
+</html>

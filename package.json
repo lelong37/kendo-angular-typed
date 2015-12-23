@@ -1,0 +1,36 @@
+{
+  "name": "kendo-typed",
+  "version": "0.0.0",
+  "description": "Kendo.Web",
+  "main": "app.js",
+  "author": "lelong37",
+  "dependencies": {
+    "body-parser": "^1.14.1",
+    "errorhandler": "^1.4.2",
+    "express": "3.4.4",
+    "jade": "*",
+    "morgan": "^1.6.1",
+    "serve-favicon": "^2.3.0",
+    "serve-static": "^1.10.0",
+    "stylus": "*"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-livereload": "^3.8.1",
+    "gulp-nodemon": "^2.0.4",
+    "gulp-typescript": "^2.10.0"
+  },
+  "scripts": {
+    "start": "node ./app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lelong37/kendo-angular-typed.git"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lelong37/kendo-angular-typed/issues"
+  },
+  "homepage": "https://github.com/lelong37/kendo-angular-typed#readme"
+}

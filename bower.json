@@ -1,0 +1,27 @@
+{
+  "name": "kendo-typed",
+  "description": "Kendo.Web",
+  "main": "app.js",
+  "authors": [
+    "lelong37@gmail.com"
+  ],
+  "license": "ISC",
+  "homepage": "http://blog.longle.net",
+  "moduleType": [],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/bower",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "angularjs#~1.4.8",
+    "jquery": "~2.1.4",
+    "angular-ui-router": "~0.2.15",
+    "bootstrap": "~3.3.6",
+    "angular-resource": "~1.4.8"
+  }
+}
