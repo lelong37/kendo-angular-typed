@@ -37,7 +37,7 @@ node_modules
 # Optional REPL history
 .node_repl_history
 
-public/app/**/*.js
+#public/app/**/*.js
 public/app/**/*.js.map
 #public/bower
 node_modules
