@@ -348,6 +348,6 @@ When doing this in VSCode it will open up the "peek" view and give you a list of
 
 ![ss](https://github.com/lelong37/kendo-angular-typed/blob/master/markdown/images/2015-12-24_12-46-21.png?raw=true)
 
-Hope are able to get a glimpse of the power TypeScript brings to your productivity int terms of robust dev and build time experience. We've uploaded this sample of the refactored Kendo UI Diagram app to GitHub, which you can find here https://github.com/lelong37/kendo-angular-typed. Stay tuned for this two upcoming articles which will cover TypeScript with Kendo & Angular 2 and TypeScript with NativeScript...! 
+Hope your are able to get a glimpse of the power TypeScript brings to your productivity int terms of robust dev and build time experience it brings to JS. We've uploaded the completed sample used in this article of the refactored Kendo UI Diagram Application (TypeScript & AngularJS) to GitHub, which you can find here https://github.com/lelong37/kendo-angular-typed. Stay tuned for this two upcoming articles which will cover TypeScript with Kendo & Angular 2 and TypeScript with NativeScript...! If there is a preference of which article you guys want out first please let me know [@lelong37](http://twitter.com/lelong37).
 
 Happy Coding...! :)
