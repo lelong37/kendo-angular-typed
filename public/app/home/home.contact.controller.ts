@@ -4,7 +4,7 @@ namespace  app.home {
     interface IContactController {
         title: string;
         message: string;
-}
+    }
 
     class ContactController implements IContactController {
 

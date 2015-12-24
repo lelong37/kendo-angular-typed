@@ -10,3 +10,4 @@
 /// <reference path="../public/lib/kendo-ui/typescript/kendo.all.d.ts" />
 /// <reference path="angularjs/angular.d.ts" />
 /// <reference path="angular-ui-router/angular-ui-router.d.ts" />
+/// <reference path="jquery/jquery.d.ts" />

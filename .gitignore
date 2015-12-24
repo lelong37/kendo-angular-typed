@@ -43,6 +43,6 @@ public/bower
 node_modules
 
 # exclude everything in Typings folder except tsd.d.ts file
-!/typings
-/typings/*
-!/typings/tsd.d.ts
+#!/typings
+#/typings/*
+#!/typings/tsd.d.ts

@@ -31,51 +31,73 @@ import IDiagramItemRotateEvent = kendo.dataviz.ui.DiagramItemRotateEvent;
 import IButtonClickEvent = kendo.ui.ButtonClickEvent;
 import IMenuSelectEvent = kendo.ui.MenuSelectEvent;
 import IUploadSelectEvent = kendo.ui.UploadSelectEvent;
-import NsIDiagramController = require("./idiagram.controller");
-import IDiagramController = NsIDiagramController.IDiagramController;
 import IDiagramZoomEndEvent = kendo.dataviz.ui.DiagramZoomEndEvent;
-import Window = kendo.ui.Window;
+import Kwindow = kendo.ui.Window;
 
 module diagram {
     'use strict';
-
+    
     interface IMenuActions {
-        blank: (e:IMenuSelectEvent) => void;
-        undo: (e:IMenuSelectEvent) => void;
-        redo: (e:IMenuSelectEvent) => void;
-        copy: (e:IMenuSelectEvent) => void;
-        paste: (e:IMenuSelectEvent) => void;
+        blank: (e: IMenuSelectEvent) => void;
+        undo: (e: IMenuSelectEvent) => void;
+        redo: (e: IMenuSelectEvent) => void;
+        copy: (e: IMenuSelectEvent) => void;
+        paste: (e: IMenuSelectEvent) => void;
     }
 
     interface IDiagramScope extends ng.IScope {
-        diagramWidget:Diagram;
-        uploadWidget:Upload;
+        diagramWidget: Diagram;
+        uploadWidget: Upload;
     }
-
-    class DiagramController implements IDiagramController {
-        diagramWidget:Diagram;
-        diagramWidgetOptions:IDiagramOptions;
-        canvasBackgroundColor:string;
+    
+    export interface IDiagramController {
+        diagramWidget: Diagram;
+        diagramWidgetOptions: IDiagramOptions;
+        canvasBackgroundColor: string;
         selected: Array<any>;
-        selectedShape:Shape;
-        selectedConnection:Connection;
-        diagramZoomOptions:ISliderOptions;
-        menuOptions:IMenuOptions;
-        uploadOptions:IUploadOptions;
-        splitterOptions:ISplitterOptions;
-        panelBarOptions:IPointOptions;
-        colorPickerOptions:IColorPickerOptions;
-        canvasLayoutOptions:IDropDownListOptions;
-        connectionCapOptions:IDropDownListOptions;
-        shapeItemDraggableOptions:IDraggableOptions;
-        alignConfigurationOptions:IButtonOptions;
-        arrangeConfigurationOptions:IButtonOptions;
-        windowWidget: Window;
-        windowWidgetOptions:IWindowOptions;
+        selectedShape: Shape;
+        selectedConnection: Connection;
+        diagramZoomOptions: ISliderOptions;
+        menuOptions: IMenuOptions;
+        uploadOptions: IUploadOptions;
+        splitterOptions: ISplitterOptions;
+        panelBarOptions: IPointOptions;
+        colorPickerOptions: IColorPickerOptions;
+        canvasLayoutOptions: IDropDownListOptions;
+        connectionCapOptions: IDropDownListOptions;
+        windowWidgetOptions: IWindowOptions;
+        shapeItemDraggableOptions: IDraggableOptions;
+        alignConfigurationOptions: IButtonOptions;
+        arrangeConfigurationOptions: IButtonOptions;
+        windowWidget: Kwindow;
+        shapePropertiesChange: (e: JQuery) => void;
+        exportClick: (e: HTMLAnchorElement) => void;
+    }
+    
+    class DiagramController implements IDiagramController {
+        diagramWidget: Diagram;
+        diagramWidgetOptions: IDiagramOptions;
+        canvasBackgroundColor: string;
+        selected: Array<any>;
+        selectedShape: Shape;
+        selectedConnection: Connection;
+        diagramZoomOptions: ISliderOptions;
+        menuOptions: IMenuOptions;
+        uploadOptions: IUploadOptions;
+        splitterOptions: ISplitterOptions;
+        panelBarOptions: IPointOptions;
+        colorPickerOptions: IColorPickerOptions;
+        canvasLayoutOptions: IDropDownListOptions;
+        connectionCapOptions: IDropDownListOptions;
+        shapeItemDraggableOptions: IDraggableOptions;
+        alignConfigurationOptions: IButtonOptions;
+        arrangeConfigurationOptions: IButtonOptions;
+        windowWidget: Kwindow;
+        windowWidgetOptions: IWindowOptions;
 
         static $inject = ['$scope', '$window'];
 
-        constructor(private $scope:IDiagramScope, private $window:any) {
+        constructor(private $scope: IDiagramScope, private $window: any) {
 
             var vm = this;
 
@@ -83,17 +105,17 @@ module diagram {
                 dataSource: [
                     {
                         text: "New", spriteCssClass: "new-item", items: [
-                        {text: "Blank", spriteCssClass: "blank-item", cssClass: "active"}
-                    ]
+                            { text: "Blank", spriteCssClass: "blank-item", cssClass: "active" }
+                        ]
                     },
-                    {text: "Open<input kendo-upload='upload' type='file' name='files' k-options='vm.uploadOptions' />", encoded: false, spriteCssClass: "open-item", cssClass: "upload-item"},
-                    {text: "Save<a id='export' download='diagram.json' ng-click='vm.exportClick($event)'></a>", encoded: false, spriteCssClass: "save-item"},
-                    {text: "Undo", spriteCssClass: "undo-item", cssClass: "active"},
-                    {text: "Redo", spriteCssClass: "redo-item", cssClass: "active"},
-                    {text: "Copy", spriteCssClass: "copy-item", cssClass: "active"},
-                    {text: "Paste", spriteCssClass: "paste-item", cssClass: "active"}
+                    { text: "Open<input kendo-upload='upload' type='file' name='files' k-options='vm.uploadOptions' />", encoded: false, spriteCssClass: "open-item", cssClass: "upload-item" },
+                    { text: "Save<a id='export' download='diagram.json' ng-click='vm.exportClick($event)'></a>", encoded: false, spriteCssClass: "save-item" },
+                    { text: "Undo", spriteCssClass: "undo-item", cssClass: "active" },
+                    { text: "Redo", spriteCssClass: "redo-item", cssClass: "active" },
+                    { text: "Copy", spriteCssClass: "copy-item", cssClass: "active" },
+                    { text: "Paste", spriteCssClass: "paste-item", cssClass: "active" }
                 ],
-                select: (e:IMenuSelectEvent) => {
+                select: (e: IMenuSelectEvent) => {
                     var item = angular.element(e.item),
                         itemText = item.children(".k-link").text();
 
@@ -106,14 +128,14 @@ module diagram {
 
             vm.splitterOptions = {
                 panes: [
-                    {collapsible: true, size: "200px"},
-                    {collapsible: false, scrollable: false},
-                    {collapsible: true, size: "300px"}
+                    { collapsible: true, size: "200px" },
+                    { collapsible: false, scrollable: false },
+                    { collapsible: true, size: "300px" }
                 ]
             };
 
             vm.panelBarOptions = {
-                expandMode: "multiple"
+                // expandMode: "multiple";
             };
 
             vm.colorPickerOptions = {
@@ -125,19 +147,19 @@ module diagram {
                 dataTextField: "text",
                 dataValueField: "value",
                 dataSource: [
-                    {text: "Tree Down", type: "tree", subtype: "down"},
-                    {text: "Tree Up", type: "tree", subtype: "up"},
-                    {text: "Tree Left", type: "tree", subtype: "left"},
-                    {text: "Tree Right", type: "tree", subtype: "right"},
-                    {text: "Radial Tree", type: "tree", subtype: "radial"},
-                    {text: "Tip Over Tree", type: "tree", subtype: "typeover"},
-                    {text: "Layered Horizontal", type: "layered", subtype: "horizontal"},
-                    {text: "Layered Vertical", type: "layered", subtype: "vertial"},
-                    {text: "Force Directed", type: "force", subtype: "directed"},
-                    {text: "Mindmap Vertical", type: "tree", subtype: "mindmapvertical"},
-                    {text: "Mindmap Horizontal", type: "tree", subtype: "mindmaphorizontal"}
+                    { text: "Tree Down", type: "tree", subtype: "down" },
+                    { text: "Tree Up", type: "tree", subtype: "up" },
+                    { text: "Tree Left", type: "tree", subtype: "left" },
+                    { text: "Tree Right", type: "tree", subtype: "right" },
+                    { text: "Radial Tree", type: "tree", subtype: "radial" },
+                    { text: "Tip Over Tree", type: "tree", subtype: "typeover" },
+                    { text: "Layered Horizontal", type: "layered", subtype: "horizontal" },
+                    { text: "Layered Vertical", type: "layered", subtype: "vertial" },
+                    { text: "Force Directed", type: "force", subtype: "directed" },
+                    { text: "Mindmap Vertical", type: "tree", subtype: "mindmapvertical" },
+                    { text: "Mindmap Horizontal", type: "tree", subtype: "mindmaphorizontal" }
                 ],
-                change: (e:IDropDownListChangeEvent):void => {
+                change: (e: IDropDownListChangeEvent): void => {
                     vm.diagramWidget.layout({
                         type: e.sender.dataItem().type,
                         subtype: e.sender.dataItem().subtype,
@@ -151,16 +173,16 @@ module diagram {
                 dataTextField: "text",
                 dataValueField: "value",
                 dataSource: [
-                    {value: "None", text: "None"},
-                    {value: "ArrowStart", text: "Arrow Start"},
-                    {value: "ArrowEnd", text: "Arrow End"},
-                    {value: "FilledCircle", text: "Filed Circle"}
+                    { value: "None", text: "None" },
+                    { value: "ArrowStart", text: "Arrow Start" },
+                    { value: "ArrowEnd", text: "Arrow End" },
+                    { value: "FilledCircle", text: "Filed Circle" }
                 ],
-                change: (e:IDropDownListChangeEvent):void => {
+                change: (e: IDropDownListChangeEvent): void => {
                     var elements = vm.selected || [],
                         element;
 
-                    for (var i:number = 0; i < elements.length; i++) {
+                    for (var i: number = 0; i < elements.length; i++) {
                         element = elements[i];
                         if (element instanceof Connection) {
                             element.redraw(vm.selectedConnection.options);
@@ -172,20 +194,20 @@ module diagram {
             };
 
             vm.shapeItemDraggableOptions = {
-                hint: (e:JQuery):JQuery => {
+                hint: (e: JQuery): JQuery => {
                     return e.clone(true, false);
                 }
             };
 
             vm.alignConfigurationOptions = {
-                click: (e:IButtonClickEvent):void => {
+                click: (e: IButtonClickEvent): void => {
                     var position = e.sender.element.data("position");
                     this.diagramWidget.alignShapes(position);
                 }
             };
 
             vm.arrangeConfigurationOptions = {
-                click: (e:IButtonClickEvent):void => {
+                click: (e: IButtonClickEvent): void => {
                     var methodName = e.sender.element.find("span").attr("class");
                     this.diagramWidget[methodName]();
                 }
@@ -199,7 +221,7 @@ module diagram {
                 largeStep: 50,
                 tickPlacement: "none",
                 showButtons: false,
-                change: (e:ISliderChangeEvent):void => {
+                change: (e: ISliderChangeEvent): void => {
                     this.diagramWidget.zoom(e.value / 100, null);
                     this.$scope.$digest();
                 }
@@ -235,9 +257,9 @@ module diagram {
                 layout: {
                     type: "tree",
                     subtype: "down",
-                    animation: true
+                    // animation: true
                 },
-                select: (e:IDiagramSelectEvent) => {
+                select: (e: IDiagramSelectEvent) => {
                     if (e.selected.length) {
                         vm.selected = e.selected;
                         var element = vm.selected[0];
@@ -250,10 +272,10 @@ module diagram {
 
                     vm.$scope.$digest();
                 },
-                itemRotate: (e:IDiagramItemRotateEvent)  => {
+                itemRotate: (e: IDiagramItemRotateEvent) => {
                     vm.$scope.$digest();
                 },
-                zoomEnd: (e:IDiagramZoomEndEvent) => {
+                zoomEnd: (e: IDiagramZoomEndEvent) => {
                     vm.$scope.$digest();
                 }
             };
@@ -268,10 +290,10 @@ module diagram {
                 localization: {
                     select: ""
                 },
-                select: (e:IUploadSelectEvent) => {
-                    if (typeof(FileReader) !== "undefined") {
-                        var f = e.files[0].rawFile,
-                            reader:any = new FileReader();
+                select: (e: IUploadSelectEvent) => {
+                    if (typeof (FileReader) !== "undefined") {
+                        var f = (e.files[0] as any).rawFile,
+                            reader: any = new FileReader();
 
                         reader.onload = ((file) => {
                             return (e) => {
@@ -283,32 +305,32 @@ module diagram {
                 }
             };
 
-            var actions:IMenuActions = {
-                blank: (e:IMenuSelectEvent):void => {
+            var actions: IMenuActions = {
+                blank: (e: IMenuSelectEvent): void => {
                     this.diagramWidget.clear();
                 },
-                undo: (e:IMenuSelectEvent):void => {
+                undo: (e: IMenuSelectEvent): void => {
                     this.diagramWidget.undo();
                 },
-                redo: (e:IMenuSelectEvent):void => {
+                redo: (e: IMenuSelectEvent): void => {
                     this.diagramWidget.redo();
                 },
-                copy: (e:IMenuSelectEvent):void => {
+                copy: (e: IMenuSelectEvent): void => {
                     this.diagramWidget.copy();
                 },
-                paste: (e:IMenuSelectEvent):void => {
+                paste: (e: IMenuSelectEvent): void => {
                     this.diagramWidget.paste();
                 }
             };
 
-var x;
+            var x;
 
-            vm.$scope.$on('kendoWidgetCreated', (event, widget:Widget) => {
+            vm.$scope.$on('kendoWidgetCreated', (event, widget: Widget) => {
                 if (widget == this.$scope.diagramWidget) {
                     vm.diagramWidget = vm.$scope.diagramWidget;
 
                     vm.diagramWidget.element.kendoDropTarget({
-                        drop: (e:any) => {
+                        drop: (e: any) => {
                             var item, pos, transformed;
                             if (e.draggable.hint) {
                                 item = e.draggable.hint.data("shape");
@@ -325,37 +347,39 @@ var x;
                 } else if (widget instanceof PanelBar) {
                     var panelBar = <PanelBar>widget;
                     panelBar.expand(">li", false);
-                } else if (widget instanceof Window){
+                } else if (widget instanceof Kwindow) {
                     vm.windowWidget = widget;
                 }
             });
         }
 
-        public shapePropertiesChange = (e:JQuery):void => {
+        public shapePropertiesChange = (e: JQuery): void => {
             var elements = this.selected || [];
-            var i:number, element;
+            var i: number, element;
             for (i = 0; i < elements.length; i++) {
                 element = elements[i];
                 if (element instanceof Shape) {
                     var shape = element;
-                    
+
                     shape.redraw({
-                        fill:this.selectedShape.options.fill,
+                        fill: this.selectedShape.options.fill,
                         stroke: this.selectedShape.options.stroke
                     });
+
+                    shape.bounds(
+                        this.selectedShape.height,
+                        this.selectedShape.width,
+                        this.selectedShape.x,
+                        this.selectedShape.y
+                    );
                     
-                    shape.bounds(new Rectangle(
-                        this.selectedShape.options.x,
-                        this.selectedShape.options.y,
-                        this.selectedShape.options.width,
-                        this.selectedShape.options.height));
                 }
             }
         };
 
-        public exportClick = (e:HTMLAnchorElement):void => {
+        public exportClick = (e: HTMLAnchorElement): void => {
             var json = JSON.stringify(this.diagramWidget.save()),
-                blob = new Blob([json], {type: "application\/json"});
+                blob = new Blob([json], { type: "application\/json" });
 
             var element = angular.element(e.target);
             var download = element.attr('download');
@@ -367,7 +391,7 @@ var x;
             }
         }
 
-        public aboutClick = (e:JQuery): void => {
+        public aboutClick = (e: JQuery): void => {
             this.windowWidget.center().open();
         }
     }

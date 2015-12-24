@@ -15068,8 +15068,9 @@ declare module kendo.dataviz.diagram {
 
     class Point extends Observable {
 
+        constructor(left: number, right: number)        
 
-        options: PointOptions;
+        options: PointOptions; //@lelong37 - adding missing typed defintion
 
 
         constructor(options?: PointOptions);
@@ -15269,6 +15270,10 @@ declare module kendo.dataviz.diagram {
 
     class Shape extends Observable {
 
+        height: number; //@lelong37
+        width: number; //@lelong37
+        x: number; //@lelong37
+        y: number; //@lelong37
 
         options: ShapeOptions;
 

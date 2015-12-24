@@ -1,9 +1,6 @@
 namespace app.home {
     'use strict';
 
-    interface IScope extends ng.IScope {
-        grid: kendo.ui.Grid;
-    }
 
     interface IIndexController {
     }
@@ -11,9 +8,7 @@ namespace app.home {
     class IndexController implements IIndexController {
 
         constructor() {
-
             const vm = this;
-
         }
     }
 
