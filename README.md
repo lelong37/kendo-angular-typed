@@ -65,3 +65,7 @@ angular
     .module('diagram')
     .controller('diagram.DiagramController', DiagramController);
 ```
+
+Notice immediately in VSCode I immediately get warnings that my interface has not been properly implemented and if I were to transpile my TypeScript I would indeed get build errors of this. This would be effectively the same if I were mix types as well (e.g. declare something of number then try to save a string value to it). 
+
+![ss](https://raw.githubusercontent.com/lelong37/kendo-angular-typed/master/markdown/images/2015-12-23_21-35-46.png)
