@@ -24,7 +24,7 @@ As a general best practice, we like to create an interface for every ng Controll
 * Intent of the ng Controller (class) is clear, just by glancing at the interface we can quickly understand what the intent, responsibility and concerns are for it.
 * Understand what is all bound to our ng.IScope ($scope)
 
-IDiagramController Interface in DiagramController.ts
+IDiagramController Interface - diagram.controller.ts
 ```js
 interface IDiagramController {
     diagramWidget: Diagram;
@@ -66,6 +66,188 @@ angular
     .controller('diagram.DiagramController', DiagramController);
 ```
 
-Notice immediately in VSCode I immediately get warnings that my interface has not been properly implemented and if I were to transpile my TypeScript I would indeed get build errors of this. This would be effectively the same if I were mix types as well (e.g. declare something of number then try to save a string value to it). 
+## TypeScript Development & Build Time Awesomeness
+
+Note: Notice immediately in VSCode I immediately get warnings that my interface has not been properly implemented and if I were to transpile my TypeScript I would indeed get build errors of this. This would be effectively the same if I were mix types as well (e.g. declare something of number then try to save a string value to it). 
 
 ![ss](https://github.com/lelong37/kendo-angular-typed/blob/master/markdown/images/2015-12-23_21-44-56.png?raw=true)
+
+Note: When fully Typing with TypeScript, notice how you will now get dev-time or build time errors when your types are mixed or inconsistent as you would with a statically typed language e.g. C#, Java, C++, etc. Below TypeScript is able to infer that myArray is of type ObservableArray from the declaration, however we then try to set myArray to an ObservableObject and TypeScript immediately indicates something has is wrong here. 
+
+![ss](https://github.com/lelong37/kendo-angular-typed/blob/master/markdown/images/2015-12-23_21-49-51.png?raw=true)
+
+##Refactoring the Actions and Kendo Menu
+Before (jQuery and JavaScript)
+```js
+ var actions = {
+    blank: reset,
+    undo: undo,
+    redo: redo,
+    copy: copyItem,
+    paste: pasteItem
+};
+
+$("#menu ul").kendoMenu({
+    dataSource: [
+        { text: "New", spriteCssClass: "new-item", items: [
+            { text: "Blank", spriteCssClass: "blank-item", cssClass: "active" }
+            ]
+        },
+        { text: "Open<input id='upload' type='file' name='files' />", encoded: false, spriteCssClass: "open-item", cssClass: "upload-item" },
+        { text: "Save<a id='export' download='diagram.json'></a>", encoded: false, spriteCssClass: "save-item" },
+        { text: "Undo", spriteCssClass: "undo-item", cssClass: "active" },
+        { text: "Redo", spriteCssClass: "redo-item", cssClass: "active" },
+        { text: "Copy", spriteCssClass: "copy-item", cssClass: "active" },
+        { text: "Paste", spriteCssClass: "paste-item", cssClass: "active" }
+    ],
+    select: function(e) {
+        var item = $(e.item),
+            itemText = item.children(".k-link").text();
+
+        if (!item.hasClass("active")) {
+            return;
+        }
+
+        actions[itemText.charAt(0).toLowerCase() + itemText.slice(1)]();
+    }
+});
+
+
+```
+After (TypeScript & AngularJS) - diagram.controller.ts
+```js
+var actions: IMenuActions = {
+    blank: (e: IMenuSelectEvent): void => {
+        this.diagramWidget.clear();
+    },
+    undo: (e: IMenuSelectEvent): void => {
+        this.diagramWidget.undo();
+    },
+    redo: (e: IMenuSelectEvent): void => {
+        this.diagramWidget.redo();
+    },
+    copy: (e: IMenuSelectEvent): void => {
+        this.diagramWidget.copy();
+    },
+    paste: (e: IMenuSelectEvent): void => {
+        this.diagramWidget.paste();
+    }
+};
+
+vm.menuOptions = {
+    dataSource: [
+        {
+            text: "New", spriteCssClass: "new-item", items: [
+                { text: "Blank", spriteCssClass: "blank-item", cssClass: "active" }
+            ]
+        },
+        { text: "Open<input kendo-upload='upload' type='file' name='files' k-options='vm.uploadOptions' />", encoded: false, spriteCssClass: "open-item", cssClass: "upload-item" },
+        { text: "Save<a id='export' download='diagram.json' ng-click='vm.exportClick($event)'></a>", encoded: false, spriteCssClass: "save-item" },
+        { text: "Undo", spriteCssClass: "undo-item", cssClass: "active" },
+        { text: "Redo", spriteCssClass: "redo-item", cssClass: "active" },
+        { text: "Copy", spriteCssClass: "copy-item", cssClass: "active" },
+        { text: "Paste", spriteCssClass: "paste-item", cssClass: "active" }
+    ],
+    select: (e: IMenuSelectEvent) => {
+        var item = angular.element(e.item),
+            itemText = item.children(".k-link").text();
+
+        if (!item.hasClass("active")) {
+            return;
+        }
+        actions[itemText.charAt(0).toLowerCase() + itemText.slice(1)](e);
+    }
+};
+```
+## Refactoring the ShapeProperties Change Event
+Here we'll refactor the ShapeProperties change event, which syncronizes the selected object on the design surface to the change you made to one of it's properties e.g. Color, Stroke, etc.
+
+Before (jQuery and JavaScript)
+```js
+$("#shapeProperties").on("change", shapePropertiesChange);
+
+function shapePropertiesChange() {
+    var elements = selected || [],
+        options = {
+            fill: $("#shapeBackgroundColorPicker").getKendoColorPicker().value(),
+            stroke: {
+                color: $("#shapeStrokeColorPicker").getKendoColorPicker().value(),
+                width: $("#shapeStrokeWidth").getKendoNumericTextBox().value()
+            }
+        },
+        bounds = new Rect(
+            $("#shapePositionX").getKendoNumericTextBox().value(),
+            $("#shapePositionY").getKendoNumericTextBox().value(),
+            $("#shapeWidth").getKendoNumericTextBox().value(),
+            $("#shapeHeight").getKendoNumericTextBox().value()
+        ),
+        element, i;
+
+    for (i = 0; i < elements.length; i++) {
+        element = elements[i];
+        if (element instanceof Shape) {
+            element.redraw(options);
+
+            element.bounds(bounds);
+        }
+    }
+}
+```
+After (TypeScript & AngularJS)
+
+diagram.html
+
+```html
+<li>
+    <span>Background Color:</span>
+    <input kendo-color-picker 
+        ng-model="vm.selectedShape.options.fill" 
+        k-on-change="vm.shapePropertiesChange(kendoEvent)" />
+</li>
+<li>
+    <span>Stroke Color:</span>
+    <input 
+        kendo-color-picker 
+        ng-model="vm.selectedShape.options.stroke.color" 
+        k-on-change="vm.shapePropertiesChange(kendoEvent)" />
+</li>
+<li>
+    <span>Stroke Width:</span>
+    <input kendo-numeric-text-box type="text" 
+        k-ng-model="vm.selectedShape.options.stroke.width"
+        k-on-change="vm.shapePropertiesChange(kendoEvent)" />
+</li>
+
+<!-- code shortened for brevity-->
+```
+diagram.controller.ts
+
+We no longer have to scrape UI controls using jQuery selectors thanks to Angular's MVVM goodness. We are now binding directly to our ViewModel from the View (html markup snippet above).
+```js
+public shapePropertiesChange = (e: JQuery): void => {
+    var elements = this.selected || [];
+    var i: number, element;
+    for (i = 0; i < elements.length; i++) {
+        element = elements[i];
+        if (element instanceof Shape) {
+            var shape = element;
+
+            shape.redraw({
+                fill: this.selectedShape.options.fill,
+                stroke: this.selectedShape.options.stroke
+            });
+
+            shape.bounds(
+                this.selectedShape.height,
+                this.selectedShape.width,
+                this.selectedShape.x,
+                this.selectedShape.y
+            );
+            
+        }
+    }
+};
+```
+
+Note: Notice how we get nice real intellisense for even Kendo UI types.
+

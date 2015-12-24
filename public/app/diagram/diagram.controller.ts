@@ -99,16 +99,6 @@ module diagram {
 
         constructor(private $scope: IDiagramScope, private $window: any) {
 
-
-            var myArray = new kendo.data.ObservableArray([]);
-            
-            
-            
-            
-            myArray = new kendo.data.ObservableObject();
-            
-
-
             var vm = this;
 
             vm.menuOptions = {
@@ -332,8 +322,6 @@ module diagram {
                     this.diagramWidget.paste();
                 }
             };
-
-            var x;
 
             vm.$scope.$on('kendoWidgetCreated', (event, widget: Widget) => {
                 if (widget == this.$scope.diagramWidget) {
