@@ -39,7 +39,7 @@ node_modules
 
 public/app/**/*.js
 public/app/**/*.js.map
-public/bower
+#public/bower
 node_modules
 
 # exclude everything in Typings folder except tsd.d.ts file
