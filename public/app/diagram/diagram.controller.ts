@@ -75,25 +75,7 @@ module diagram {
     }
     
     class DiagramController implements IDiagramController {
-        diagramWidget: Diagram;
-        diagramWidgetOptions: IDiagramOptions;
-        canvasBackgroundColor: string;
-        selected: Array<any>;
-        selectedShape: Shape;
-        selectedConnection: Connection;
-        diagramZoomOptions: ISliderOptions;
-        menuOptions: IMenuOptions;
-        uploadOptions: IUploadOptions;
-        splitterOptions: ISplitterOptions;
-        panelBarOptions: IPointOptions;
-        colorPickerOptions: IColorPickerOptions;
-        canvasLayoutOptions: IDropDownListOptions;
-        connectionCapOptions: IDropDownListOptions;
-        shapeItemDraggableOptions: IDraggableOptions;
-        alignConfigurationOptions: IButtonOptions;
-        arrangeConfigurationOptions: IButtonOptions;
-        windowWidget: Kwindow;
-        windowWidgetOptions: IWindowOptions;
+      
 
         static $inject = ['$scope', '$window'];
 
