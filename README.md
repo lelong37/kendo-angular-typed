@@ -82,6 +82,8 @@ https://github.com/lelong37/kendo-angular-typed/blob/master/tsd.json
 ```
 Notice how the Kendo UI tsd is in the list (above), sometimes JS libraries we download e.g. kendo, anguar-ui-router, etc. include the tsd with them. In these cases we can just open up the tsd.d.ts file and reference them directly to where they are in our app/project directory structure (relative path).  
 
+For this article we'll refactor the Kendo UI Diagram Sample Application (http://demos.telerik.com/kendo-ui/html5-diagram-sample-app) to TypeScript using AngularJS. This will be good sample to work with because it has a long list of Kendo UI widgets that is used in this sample app. With this we can illustrate working with a vast amount of Kendo UI widgets with TypeScript and AngularJS. 
+
 First off, let's go ahead and address separation of concerns, we'll go ahead and separate the view (presentation) from the any logic and place that logic in the view model along with any other view like responsibilities like widget initializing and data-binding as well. 
 
 Note: In TypeScript there is the notion of static typing your data types, and from what I've seen, most teams usually just fully qualify whatever their typing. However for this article we'll go ahead and alias most of Kendo UI typing's so that there shorter, cleaner and for sake of brevity of this article. Again, you can skip the aliasing of the namespaces step here and fully qualify everyting if you wanted to. 
@@ -348,6 +350,6 @@ When doing this in VSCode it will open up the "peek" view and give you a list of
 
 ![ss](https://github.com/lelong37/kendo-angular-typed/blob/master/markdown/images/2015-12-24_12-46-21.png?raw=true)
 
-Hope your are able to get a glimpse of the power TypeScript brings to your productivity int terms of robust dev and build time experience it brings to JS. We've uploaded the completed sample used in this article of the refactored Kendo UI Diagram Application (TypeScript & AngularJS) to GitHub, which you can find here https://github.com/lelong37/kendo-angular-typed. Stay tuned for this two upcoming articles which will cover TypeScript with Kendo & Angular 2 and TypeScript with NativeScript...! If there is a preference of which article you guys want out first please let me know [@lelong37](http://twitter.com/lelong37).
+Hope your are able to get a glimpse of the power TypeScript brings to your productivity int terms of robust dev and build time experience it brings to JS. We've uploaded the completed sample used in this article of the refactored Kendo UI Diagram Application (TypeScript & AngularJS) to GitHub, which you can find here https://github.com/lelong37/kendo-angular-typed. We've also deployed the completed refactored application here http://kendo-typed.azurewebsites.net/app/diagram/diagram.html. Stay tuned for this two upcoming articles which will cover TypeScript with Kendo & Angular 2 and TypeScript with NativeScript...! If there is a preference of which article you guys want out first please let me know [@lelong37](http://twitter.com/lelong37).
 
 Happy Coding...! :)
