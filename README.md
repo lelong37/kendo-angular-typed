@@ -8,7 +8,7 @@ What does the world look like in TypeScript? What would you gain or loose coding
 
 * Node.js (which will install npm - Node Package Manager)
 * IDE is TypeScript friendly
-    * VSCode
+    * VSCode *(my perosnal defacto standard IDE & the one used for this article)*
     * WebStorm
     * Sublime (w/ TypeScript plug-in)
     * Atom (w/ TypeScript plug-in)
