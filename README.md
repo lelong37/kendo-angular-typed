@@ -25,7 +25,7 @@ To install TSD (need to have node.js already installed for npm command line tool
 npm install tsd -g
 ```
 
-You can now search and install other TypeScript packages
+You can now search and install other TypeScript packages. Note: tsd currently has all defnitions for both client side (browser) JS libraries and server side JS libraries (npm) as well.
 
 ```
 tsd query angular
@@ -128,7 +128,7 @@ interface IDiagramController {
     exportClick: (e: HTMLAnchorElement) => void;
 }
 ```
-Now we can setup the class/implementation for IDiagramController which will use as the ng Controller/ViewModel for our ng View. Notice below our class or implementation is when we then register our DiagramController with ng (AngularJS).
+Now we can setup the class/implementation for IDiagramController which will use as the ng Controller/ViewModel for our ng View. Notice below our class or implementation is when we then register our DiagramController with Angular. Note: we've also recommend this approach with Angular 1.x because this will play nicely if any whenver you deciede to upgrade to Angular v2.
 ```js
 class DiagramController implements IDiagramController {
     
@@ -190,9 +190,10 @@ $("#menu ul").kendoMenu({
     }
 });
 
-
 ```
 After (TypeScript & AngularJS) - diagram.controller.ts
+
+https://github.com/lelong37/kendo-angular-typed/blob/master/public/app/diagram/diagram.controller.ts
 ```js
 var actions: IMenuActions = {
     blank: (e: IMenuSelectEvent): void => {
@@ -275,6 +276,8 @@ After (TypeScript & AngularJS)
 
 diagram.html
 
+https://github.com/lelong37/kendo-angular-typed/blob/master/public/app/diagram/diagram.html
+
 ```html
 <li>
     <span>Background Color:</span>
@@ -299,6 +302,8 @@ diagram.html
 <!-- code shortened for brevity-->
 ```
 diagram.controller.ts
+
+https://github.com/lelong37/kendo-angular-typed/blob/master/public/app/diagram/diagram.controller.ts
 
 We no longer have to scrape UI controls using jQuery selectors thanks to Angular's MVVM goodness. We are now binding directly to our ViewModel from the View (html markup snippet above).
 ```js
@@ -327,7 +332,7 @@ public shapePropertiesChange = (e: JQuery): void => {
 };
 ```
 
-Note: Notice how we get nice real intellisense for even Kendo UI types. Again, this is because when we declared selectedShape, we proprely typed it to the actual Kendo UI Shape type.
+Note: Notice how we get nice real intellisense for even Kendo UI types. Again, this is because when we declared selectedShape, we proprely typed it to the actual Kendo UI Shape type. Obviously this would be the same for all library types you pulled in their TSD's for e.g. jQuery, Angular, lodash, etc. 
 
 ```js
 var selectedShape: kendo.dataviz.diagram.Shape;
@@ -335,5 +340,14 @@ var selectedShape: kendo.dataviz.diagram.Shape;
 
 ![ss](https://github.com/lelong37/kendo-angular-typed/blob/master/markdown/images/2015-12-23_22-26-25.png?raw=true)
 
-Also we can now do a true "Find all References" or "Find all Usages" e.g.
+Also we can now do a true "Find all References" or "Find all Usages" e.g. here will do a find "Find All References" for this.selectedShape on our ViewModel or Angular Controller. Given if this was something that was used solution/project wide, our results list would span the entire solution/project as well. 
 
+![ss](https://github.com/lelong37/kendo-angular-typed/blob/master/markdown/images/2015-12-24_12-44-16.png?raw=true)
+
+When doing this in VSCode it will open up the "peek" view and give you a list of all usages of "this.selectedShape" on the right, you can navigate to each occurence by clicking on them. As you navigate through the list the view on the right will automaticlally scroll to that occurence. 
+
+![ss](https://github.com/lelong37/kendo-angular-typed/blob/master/markdown/images/2015-12-24_12-46-21.png?raw=true)
+
+Hope are able to get a glimpse of the power TypeScript brings to your productivity int terms of robust dev and build time experience. We've uploaded this sample of the refactored Kendo UI Diagram app to GitHub, which you can find here https://github.com/lelong37/kendo-angular-typed. Stay tuned for this two upcoming articles which will cover TypeScript with Kendo & Angular 2 and TypeScript with NativeScript...! 
+
+Happy Coding...! :)
