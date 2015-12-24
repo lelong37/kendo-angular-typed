@@ -1,9 +1,87 @@
 ﻿# Kendo, AngularJS and TypeScript
-by: [Long Le](http://twitter.com/lelong37)
+by: [Long Le](http://twitter.com/lelong37) *TDE @ [Neudesic](http://neudesic.com)*
 
 What does the world look like in TypeScript? What would you gain or loose coding in TypeScript vs. ES6? If anyones been pondering on this question, today we'll do a deep dive to help you sort these answers out yourself. Best way to illustrate this is with code, so let's dive right into it. We'll start with converting one of Kendo UI's sample apps, and the winner will the their Layout Diagram App, this would be a good candidate since it's slammed with Kendo UI controls of all sorts. With many of us developing with ng (AngularJS), we'll go ahead and refactor it from it's jQuery implementation to ng in the process as well. For those of us that aren't using ng, simply ignore the specific ng bits.
 
 ## Preparation
+###Prerequisites
+
+* Node.js (which will install npm - Node Package Manager)
+* IDE is TypeScript friendly
+    * VSCode
+    * WebStorm
+    * Sublime (w/ TypeScript plug-in)
+    * Atom (w/ TypeScript plug-in)
+    * Visual Studio (all editions)
+* TSD (TypeScript Definition Manager - command line tool)
+
+###TSD (TypeScript Definition Manager)
+
+You'll need to download all your TypeScript definitions (http://definitelytyped.org/tsd/),think of this as all the definitions for your JS libraries that are in your project e.g. AngularJS, lodash, Kendo UI, etc. You can think of the TSD command-line tool equivalient to all our other package (like) dependency tools e.g. nuget, bower, npm, etc. 
+
+To install TSD (need to have node.js already installed for npm command line tool) -g is an option to install tsd globally so you can execute tsd from any command line.
+
+```
+npm install tsd -g
+```
+
+You can now search and install other TypeScript packages
+
+```
+tsd query angular
+```
+Which would yield these results
+```
+ - angular-agility            / angular-agility               
+ - angular-bootstrap-lightbox / angular-bootstrap-lightbox    
+ - angular-dialog-service     / angular-dialog-service        
+ - angular-dynamic-locale     / angular-dynamic-locale        
+ - angular-file-upload        / angular-file-upload           
+ - angular-formly             / angular-formly                
+ - angular-gettext            / angular-gettext               
+ - angular-google-analytics   / angular-google-analytics      
+ - angular-growl-v2           / angular-growl-v2              
+ - angular-hotkeys            / angular-hotkeys
+ - angularjs                  / angular                    
+ 
+ list shortened for brevity...     
+```
+
+You can then install a specific one e.g. installing angular, notice how TypeScript Definition files are suffixed with "d.ts" e.g. angular.d.ts for the AngularJS TypeScript defiinition file. Notice how we passed in the --save option, this will create a tsd.d.ts file if it doesn't already exists and add an entry in this file for each of our project TypeScript definition dependencies our project has.
+
+```
+tsd install angular --save
+```
+
+```
+├── myapp/
+│   ├── typings
+│   │   ├── angularjs
+│   │   │   ├── anguar.d.ts
+│   │   ├── tsd.d.ts
+```
+Notice how we have a line added for our angular tsd dependency now along with all our other tsd dependencies for our app/project.
+
+**tsd.d.ts**
+
+https://github.com/lelong37/kendo-angular-typed/blob/master/tsd.json
+```json
+/// <reference path="express/express.d.ts" />
+/// <reference path="node/node.d.ts" />
+/// <reference path="stylus/stylus.d.ts" />
+/// <reference path="serve-favicon/serve-favicon.d.ts" />
+/// <reference path="morgan/morgan.d.ts" />
+/// <reference path="body-parser/body-parser.d.ts" />
+/// <reference path="errorhandler/errorhandler.d.ts" />
+/// <reference path="serve-static/serve-static.d.ts" />
+/// <reference path="mime/mime.d.ts" />
+/// <reference path="../public/lib/kendo-ui/typescript/kendo.all.d.ts" />
+/// <reference path="angularjs/angular.d.ts" />
+/// <reference path="angular-ui-router/angular-ui-router.d.ts" />
+/// <reference path="jquery/jquery.d.ts" />
+```
+Notice how the Kendo UI tsd is in the list (above), sometimes JS libraries we download e.g. kendo, anguar-ui-router, etc. include the tsd with them. In these cases we can just open up the tsd.d.ts file and reference them directly to where they are in our app/project directory structure (relative path).  
+
 First off, let's go ahead and address separation of concerns, we'll go ahead and separate the view (presentation) from the any logic and place that logic in the view model along with any other view like responsibilities like widget initializing and data-binding as well. 
 
 Note: In TypeScript there is the notion of static typing your data types, and from what I've seen, most teams usually just fully qualify whatever their typing. However for this article we'll go ahead and alias most of Kendo UI typing's so that there shorter, cleaner and for sake of brevity of this article. Again, you can skip the aliasing of the namespaces step here and fully qualify everyting if you wanted to. 
@@ -249,5 +327,13 @@ public shapePropertiesChange = (e: JQuery): void => {
 };
 ```
 
-Note: Notice how we get nice real intellisense for even Kendo UI types.
+Note: Notice how we get nice real intellisense for even Kendo UI types. Again, this is because when we declared selectedShape, we proprely typed it to the actual Kendo UI Shape type.
+
+```js
+var selectedShape: kendo.dataviz.diagram.Shape;
+```
+
+![ss](https://github.com/lelong37/kendo-angular-typed/blob/master/markdown/images/2015-12-23_22-26-25.png?raw=true)
+
+Also we can now do a true "Find all References" or "Find all Usages" e.g.
 
