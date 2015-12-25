@@ -19,8 +19,7 @@ var diagram;
             this.shapePropertiesChange = function (e) {
                 var elements = _this.selected || [];
                 var i, element;
-                for (i = 0; i < elements.length; i++) {
-                    element = elements[i];
+                elements.forEach(function (element) {
                     if (element instanceof Shape) {
                         var shape = element;
                         shape.redraw({
@@ -29,7 +28,7 @@ var diagram;
                         });
                         shape.bounds(_this.selectedShape.height, _this.selectedShape.width, _this.selectedShape.x, _this.selectedShape.y);
                     }
-                }
+                });
             };
             this.exportClick = function (e) {
                 var json = JSON.stringify(_this.diagramWidget.save()), blob = new Blob([json], { type: "application\/json" });

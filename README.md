@@ -314,8 +314,8 @@ We no longer have to scrape UI controls using jQuery selectors thanks to Angular
 public shapePropertiesChange = (e: JQuery): void => {
     var elements = this.selected || [];
     var i: number, element;
-    for (i = 0; i < elements.length; i++) {
-        element = elements[i];
+    
+    elements.forEach((element) => {
         if (element instanceof Shape) {
             var shape = element;
 
@@ -330,9 +330,8 @@ public shapePropertiesChange = (e: JQuery): void => {
                 this.selectedShape.x,
                 this.selectedShape.y
             );
-            
         }
-    }
+    });            
 };
 ```
 

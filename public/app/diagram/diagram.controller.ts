@@ -354,8 +354,8 @@ module diagram {
         public shapePropertiesChange = (e: JQuery): void => {
             var elements = this.selected || [];
             var i: number, element;
-            for (i = 0; i < elements.length; i++) {
-                element = elements[i];
+            
+            elements.forEach((element) => {
                 if (element instanceof Shape) {
                     var shape = element;
 
@@ -370,9 +370,8 @@ module diagram {
                         this.selectedShape.x,
                         this.selectedShape.y
                     );
-                    
                 }
-            }
+            });            
         };
 
         public exportClick = (e: HTMLAnchorElement): void => {
