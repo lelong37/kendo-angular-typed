@@ -335,7 +335,7 @@ public shapePropertiesChange = (e: JQuery): void => {
 };
 ```
 
->>Notice how we get new features of [ES6/ECMA6](https://developer.mozilla.org/en-US/docs/Web/JavaScript/New_in_JavaScript/ECMAScript_6_support_in_Mozilla) such as arrow functions (forEach method above) aka fat arrows and lambdas, passed into the <code>myArray.forEach((x)=>{ //do something })</code>.
+>>Notice how we get new features of [ES6/ECMA6](https://developer.mozilla.org/en-US/docs/Web/JavaScript/New_in_JavaScript/ECMAScript_6_support_in_Mozilla) such as arrow functions (forEach method above) aka fat arrows and lambdas, passed into the ```myArray.forEach((x)=>{  })```.
 
 >>With the recent release of [TypeScript v1.7x](http://blogs.msdn.com/b/typescript/archive/2015/11/30/announcing-typescript-1-7.aspx) we also get to develop with new features of [ES7/ECMA7](https://developer.mozilla.org/en-US/docs/Web/JavaScript/New_in_JavaScript/ECMAScript_7_support_in_Mozilla) today which all transpiles down to a compatible version of your choice that will run in today's browser that may not support ES6 or ES7 just yet.
 
