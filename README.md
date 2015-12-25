@@ -84,19 +84,19 @@ Notice how the Kendo UI tsd is in the list (above), sometimes JS libraries we do
 
 For this article we'll refactor the Kendo UI Diagram Sample Application (http://demos.telerik.com/kendo-ui/html5-diagram-sample-app) to TypeScript using AngularJS. This will be good sample to work with because it has a long list of Kendo UI widgets that is used in this sample app. With this we can illustrate working with a vast amount of Kendo UI widgets with TypeScript and AngularJS. 
 
-First off, let's go ahead and address separation of concerns, we'll go ahead and separate the view (presentation) from the any logic and place that logic in the view model along with any other view like responsibilities like widget initializing and data-binding as well. 
-
 Note: In TypeScript there is the notion of static typing your data types, and from what I've seen, most teams usually just fully qualify whatever their typing. However for this article we'll go ahead and alias most of Kendo UI typing's so that there shorter, cleaner and for sake of brevity of this article. Again, you can skip the aliasing of the namespaces step here and fully qualify everyting if you wanted to. 
 
-e.g. Initializing an ObservableArray by fully qualified namespace
+Initializing an ObservableArray by fully qualified namespace
 ```js
 var myArray = new kendo.data.ObservableArray([]);
 ```
-e.g. Initializing an ObserverableArray by aliased namespace, 
+Initializing an ObserverableArray by aliased namespace, 
 ```js
 import ObserverablleArray = kendo.data.ObservableArray; // aliased
 var myArray = new ObserverablleArray([]); // initialized w/ alias
 ```
+
+First off, let's go ahead and address separation of concerns, we'll go ahead and separate the view (presentation) from the any logic and place that logic in the view model along with any other view like responsibilities like widget initializing and data-binding as well. 
 
 ## Abstraction with TypeScript Interfaces (optional)
 As a general best practice, we like to create an interface for every ng Controller/ViewModel and place it in the same file as the implementation of the Controller. Why? A few important reasons why:
@@ -146,13 +146,15 @@ angular
     .controller('diagram.DiagramController', DiagramController);
 ```
 
-## TypeScript Development & Build Time Awesomeness
+## TypeScript Development Time & Build Time Awesomeness
 
-Note: Notice immediately in VSCode I immediately get warnings that my interface has not been properly implemented and if I were to transpile my TypeScript I would indeed get build errors of this. This would be effectively the same if I were mix types as well (e.g. declare something of number then try to save a string value to it). 
+Note: Notice immediately in VSCode I immediately get warnings that my interface has not been properly implemented and if I were to transpile my TypeScript I would indeed get build errors of this. This would be effectively the same if I were mix types as well (e.g. declare something of number then try to save a string value to it).
 
 ![ss](https://github.com/lelong37/kendo-angular-typed/blob/master/markdown/images/2015-12-23_21-44-56.png?raw=true)
 
-Note: When fully Typing with TypeScript, notice how you will now get dev-time or build time errors when your types are mixed or inconsistent as you would with a statically typed language e.g. C#, Java, C++, etc. Below TypeScript is able to infer that myArray is of type ObservableArray from the declaration, however we then try to set myArray to an ObservableObject and TypeScript immediately indicates something has is wrong here. 
+>> Type Safety for everything that is Typed with IDE support for dev time and build time errors
+
+Note: When fully Typing with TypeScript, notice how you will now get dev-time or build time errors when your types are mixed or inconsistent as you would with a statically typed language e.g. C#, Java, C++, etc. Below TypeScript is able to infer that myArray is of type ObservableArray from the declaration, however we then try to set myArray to an ObservableObject and TypeScript immediately indicates something has is wrong here.
 
 ![ss](https://github.com/lelong37/kendo-angular-typed/blob/master/markdown/images/2015-12-23_21-49-51.png?raw=true)
 
@@ -343,6 +345,11 @@ var selectedShape: kendo.dataviz.diagram.Shape;
 ![ss](https://github.com/lelong37/kendo-angular-typed/blob/master/markdown/images/2015-12-23_22-26-25.png?raw=true)
 
 Also we can now do a true "Find all References" or "Find all Usages" e.g. here will do a find "Find All References" for this.selectedShape on our ViewModel or Angular Controller. Given if this was something that was used solution/project wide, our results list would span the entire solution/project as well. 
+
+> * Solution wide "real" refactoring
+> * Solution wide find all references/usages
+> * Peek (real) definition
+> * Go to (real) definition
 
 ![ss](https://github.com/lelong37/kendo-angular-typed/blob/master/markdown/images/2015-12-24_12-44-16.png?raw=true)
 
