@@ -350,6 +350,8 @@ Also we can now do a true "Find all References" or "Find all Usages" e.g. here w
 > * Solution wide find all references/usages
 > * Peek definition
 > * Go to definition
+> 
+><sup>*Note: These features are not exclusive to VSCode, they are all available on most IDE's that offcially support TypeScript*</sup>
 
 ![ss](https://github.com/lelong37/kendo-angular-typed/blob/master/markdown/images/2015-12-24_12-44-16.png?raw=true)
 
