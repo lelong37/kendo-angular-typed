@@ -1,4 +1,4 @@
-﻿# Kendo, AngularJS and TypeScript <3
+﻿# Kendo, AngularJS, VSCode & TypeScript <3
 by: [Long Le](http://twitter.com/lelong37) *TDE @ [Neudesic](http://neudesic.com)*
 
 What does the world look like in TypeScript? What would you gain or loose coding in TypeScript vs. ES6? If anyones been pondering on this question, today we'll do a deep dive to help you sort these answers out yourself. Best way to illustrate this is with code, so let's dive right into it. We'll start with converting one of Kendo UI's sample apps, and the winner will the their Layout Diagram App, this would be a good candidate since it's slammed with Kendo UI controls of all sorts. With many of us developing with ng (AngularJS), we'll go ahead and refactor it from it's jQuery implementation to ng in the process as well. For those of us that aren't using ng, simply ignore the specific ng bits.
@@ -346,10 +346,10 @@ var selectedShape: kendo.dataviz.diagram.Shape;
 
 Also we can now do a true "Find all References" or "Find all Usages" e.g. here will do a find "Find All References" for this.selectedShape on our ViewModel or Angular Controller. Given if this was something that was used solution/project wide, our results list would span the entire solution/project as well. 
 
-> * Solution wide "real" refactoring
+> * Solution wide refactoring
 > * Solution wide find all references/usages
-> * Peek (real) definition
-> * Go to (real) definition
+> * Peek definition
+> * Go to definition
 
 ![ss](https://github.com/lelong37/kendo-angular-typed/blob/master/markdown/images/2015-12-24_12-44-16.png?raw=true)
 

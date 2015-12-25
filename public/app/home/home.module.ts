@@ -1,4 +1,4 @@
-((): void => {
+    ((): void => {
 
     'use strict';
 
