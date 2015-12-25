@@ -1,6 +1,6 @@
 ﻿# Kendo, AngularJS, VSCode & TypeScript <3
 by: [Long Le](http://twitter.com/lelong37) *TDE @ [Neudesic](http://neudesic.com)*
-<table>
+<table style="height:70px">
 <tr>
 <td>
 <h2>Kendo UI</h2>
