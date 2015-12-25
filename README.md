@@ -18,7 +18,7 @@ What does the world look like in TypeScript? What would you gain or lose coding 
 
 ###TSD (TypeScript Definition Manager)
 
-You'll need to download all your TypeScript definitions (http://definitelytyped.org/tsd),think of this as all the definitions for your JS libraries that are in your project e.g. AngularJS, lodash, Kendo UI, etc. You can think of the TSD command-line tool equivalient to all our other package (like) dependency tools e.g. nuget, bower, npm, etc. 
+You'll need to download all your TypeScript definitions (http://definitelytyped.org/tsd),think of this as all the definitions for your JS libraries that are in your project e.g. AngularJS, lodash, Kendo UI, etc. You can think of the TSD command-line tool equivalient to all our other package (like) dependency tools e.g. nuget, bower, npm, etc.
 
 To install TSD (need to have node.js already installed for npm command line tool) -g is an option to install tsd globally so you can execute tsd from any command line.
 
