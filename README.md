@@ -1,23 +1,24 @@
 ﻿# Kendo, AngularJS, VSCode & TypeScript <3
 by: [Long Le](http://twitter.com/lelong37) *TDE @ [Neudesic](http://neudesic.com)* 
 
-What does the world look like in TypeScript? What would you gain or loose coding in TypeScript vs. ES6? If anyones been pondering on this question, today we'll do a deep dive to help you sort these answers out yourself. Best way to illustrate this is with code, so let's dive right into it. We'll start with converting one of Kendo UI's sample apps, and the winner will the their Layout Diagram App, this would be a good candidate since it's slammed with Kendo UI controls of all sorts. With many of us developing with ng (AngularJS), we'll go ahead and refactor it from it's jQuery implementation to ng in the process as well. For those of us that aren't using ng, simply ignore the specific ng bits.
+What does the world look like in TypeScript? What would you gain or lose coding in TypeScript vs. ES6? If anyones been pondering on this question, today we'll do a deep dive to help you sort these answers out yourself. Best way to illustrate this is with code, so let's dive right into it. We'll start with converting one of Kendo UI's sample apps, and the winner will the their Layout Diagram App, this would be a good candidate since it's slammed with Kendo UI controls of all sorts. With many of us developing with ng (AngularJS), we'll go ahead and refactor it from its jQuery implementation to ng in the process as well. For those of us that aren't using ng, simply ignore the specific ng bits.
 
 ## Preparation
 ###Prerequisites
 
-* Node.js (which will install npm - Node Package Manager)
-* IDE is TypeScript friendly
-    * VSCode *(my perosnal defacto standard IDE & the one used for this article)*
-    * WebStorm
-    * Sublime (w/ TypeScript plug-in)
-    * Atom (w/ TypeScript plug-in)
-    * Visual Studio (all editions)
-* TSD (TypeScript Definition Manager - command line tool)
+* [Node.js](https://nodejs.org/en/) (which will install [npm](https://www.npmjs.com/) - Node Package Manager)
+* IDE is [TypeScript](http://www.typescriptlang.org/) friendly - *just to name a few:*
+    * [VSCode](https://code.visualstudio.com) *(my perosnal defacto standard IDE & the one used for this article)*
+    * [WebStorm](https://www.jetbrains.com/webstorm) 
+    * [Sublime](http://www.sublimetext.com) (w/ [TypeScript plug-in](https://github.com/Microsoft/TypeScript-Sublime-Plugin))
+    * [Atom](https://atom.io/) (w/ [TypeScript plug-in](https://atom.io/packages/atom-typescript))
+    * [Visual Studio](https://www.visualstudio.com/en-us/visual-studio-homepage-vs.aspx) (all editions)
+    * [Eclipse](https://eclipse.org/downloads/)
+* [TSD](http://definitelytyped.org/tsd/) (TypeScript Definition Manager - command line tool)
 
 ###TSD (TypeScript Definition Manager)
 
-You'll need to download all your TypeScript definitions (http://definitelytyped.org/tsd/),think of this as all the definitions for your JS libraries that are in your project e.g. AngularJS, lodash, Kendo UI, etc. You can think of the TSD command-line tool equivalient to all our other package (like) dependency tools e.g. nuget, bower, npm, etc. 
+You'll need to download all your TypeScript definitions (http://definitelytyped.org/tsd),think of this as all the definitions for your JS libraries that are in your project e.g. AngularJS, lodash, Kendo UI, etc. You can think of the TSD command-line tool equivalient to all our other package (like) dependency tools e.g. nuget, bower, npm, etc. 
 
 To install TSD (need to have node.js already installed for npm command line tool) -g is an option to install tsd globally so you can execute tsd from any command line.
 
