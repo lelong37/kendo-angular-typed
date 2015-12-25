@@ -346,6 +346,7 @@ var selectedShape: kendo.dataviz.diagram.Shape;
 
 Also we can now do a true "Find all References" or "Find all Usages" e.g. here will do a find "Find All References" for this.selectedShape on our ViewModel or Angular Controller. Given if this was something that was used solution/project wide, our results list would span the entire solution/project as well. 
 
+> TypeScript Super Features
 > * Solution wide refactoring
 > * Solution wide find all references/usages
 > * Peek definition
