@@ -1,3 +1,5 @@
+#Improving Development with TypeScript
+
 What does the world look like in TypeScript? What do you gain or lose by coding in TypeScript versus ES6?
 
 In case you've been pondering this question, today we'll do a deep dive to help you sort the answer. The best way to illustrate this is with code, so let's dive right into it. In this article, we'll convert one of Kendo UI's sample apps - the Layout Diagram App. I chose this example because it's stuffed with Kendo UI controls of all sorts. Since many of us develop with AngularJS, we'll go ahead and refactor it from its jQuery implementation to Angular as well (if you don't use Angular, the example is still relevant, simply ignore the specific Angular bits).
