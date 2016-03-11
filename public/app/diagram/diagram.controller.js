@@ -271,7 +271,7 @@ var diagram;
         }
         DiagramController.$inject = ['$scope', '$window'];
         return DiagramController;
-    })();
+    }());
     angular
         .module('diagram')
         .controller('diagram.DiagramController', DiagramController);

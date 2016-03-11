@@ -10,7 +10,7 @@ var app;
                 vm.title = "About.";
             }
             return AboutController;
-        })();
+        }());
         angular
             .module('app.home')
             .controller('app.home.IAboutController', AboutController);

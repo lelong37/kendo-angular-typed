@@ -10,7 +10,7 @@ var app;
                 vm.title = "Contact";
             }
             return ContactController;
-        })();
+        }());
         angular
             .module('app.home')
             .controller('app.home.IContactController', ContactController);

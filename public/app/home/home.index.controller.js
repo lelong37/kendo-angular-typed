@@ -8,7 +8,7 @@ var app;
                 var vm = this;
             }
             return IndexController;
-        })();
+        }());
         angular
             .module('app.home')
             .controller('app.home.IIndexController', IndexController);
